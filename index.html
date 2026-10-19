@@ -1,0 +1,291 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Фатима Нурланбекова</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: left-aligned hero with a code card on the right, then about, skills, projects. Bold move: the hero is her own profile written as a JS object. */
+:root {
+  --bg: #F2F5FA;
+  --surface: #FFFFFF;
+  --fg: #111827;
+  --muted: #4B5568;
+  --line: #D5DBE7;
+  --accent: #2540E8;
+  --accent-ink: #FFFFFF;
+  --mark: #FFC21A;
+  --code-bg: #101626;
+  --code-fg: #DCE3F5;
+  --code-key: #8EA2FF;
+  --code-str: #FFC21A;
+  --code-num: #7EE0B0;
+  --code-dim: #6B7794;
+  --font-display: "Unbounded", "Onest", system-ui, sans-serif;
+  --font-body: "Onest", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0C111D;
+    --surface: #151C2C;
+    --fg: #EEF1F8;
+    --muted: #9AA5BC;
+    --line: #26304A;
+    --accent: #8EA2FF;
+    --accent-ink: #0C111D;
+    --code-bg: #060914;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0C111D;
+  --surface: #151C2C;
+  --fg: #EEF1F8;
+  --muted: #9AA5BC;
+  --line: #26304A;
+  --accent: #8EA2FF;
+  --accent-ink: #0C111D;
+  --code-bg: #060914;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  padding-block: 0 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1080px; margin: 0 auto; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+/* top bar */
+.top {
+  display: flex; flex-wrap: wrap; gap: 12px 28px;
+  align-items: center; justify-content: space-between;
+  padding-block: 22px;
+}
+.brand { font-family: var(--font-mono); font-size: 15px; font-weight: 500; text-decoration: none; }
+.brand b { color: var(--accent); font-weight: 500; }
+.nav { display: flex; gap: 22px; font-size: 15px; }
+.nav a { text-decoration: none; color: var(--muted); padding-block: 4px; border-bottom: 2px solid transparent; }
+.nav a:hover { color: var(--fg); border-bottom-color: var(--mark); }
+
+/* hero */
+.hero {
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 40px; align-items: center;
+  padding-block: 40px 72px;
+}
+.tag {
+  display: inline-block; font-family: var(--font-mono); font-size: 13px;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px;
+  color: var(--muted); background: var(--surface);
+}
+h1 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(1.8rem, 7vw, 3.6rem); line-height: 1.08;
+  letter-spacing: -0.02em; margin: 20px 0 18px;
+  overflow-wrap: anywhere; text-wrap: balance;
+}
+.role { font-size: clamp(1.15rem, 2.6vw, 1.4rem); margin: 0 0 28px; max-width: 30ch; }
+.role mark { background: linear-gradient(transparent 58%, var(--mark) 58%); color: inherit; padding: 0 2px; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-block; text-decoration: none; font-weight: 600; font-size: 16px;
+  padding: 13px 22px; border-radius: 10px; border: 2px solid var(--fg);
+}
+.btn.solid { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.solid:hover { filter: brightness(1.08); }
+.btn.ghost:hover { background: var(--surface); }
+
+.code {
+  background: var(--code-bg); color: var(--code-fg);
+  border-radius: 14px; overflow: hidden; min-width: 0;
+  box-shadow: 0 18px 40px -22px rgba(16, 22, 38, 0.55);
+}
+.code-bar {
+  display: flex; align-items: center; gap: 8px; padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--font-mono); font-size: 12.5px; color: var(--code-dim);
+}
+.code-bar i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.16); display: block; }
+.code-bar span { margin-left: 8px; }
+.code pre {
+  margin: 0; padding: 18px 18px 22px; overflow-x: auto;
+  font-family: var(--font-mono); font-size: 14px; line-height: 1.75;
+}
+.k { color: var(--code-key); }
+.s { color: var(--code-str); }
+.n { color: var(--code-num); }
+.d { color: var(--code-dim); }
+
+/* sections */
+section { padding-block: 56px; border-top: 1px solid var(--line); }
+.eyebrow { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px; }
+h2 {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.5rem, 4vw, 2.2rem); line-height: 1.15;
+  letter-spacing: -0.01em; margin: 0 0 28px; text-wrap: balance;
+}
+
+.about { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 40px; }
+.about p { margin: 0 0 16px; max-width: 60ch; }
+.facts { margin: 0; display: grid; gap: 0; align-content: start; }
+.facts div { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 12px; padding-block: 12px; border-bottom: 1px solid var(--line); }
+.facts div:first-child { border-top: 1px solid var(--line); }
+.facts dt { font-family: var(--font-mono); font-size: 13px; color: var(--muted); padding-top: 3px; }
+.facts dd { margin: 0; font-weight: 500; }
+
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+.skill { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px 22px 24px; min-width: 0; }
+.skill:hover { border-color: var(--accent); }
+.glyph { font-family: var(--font-mono); font-size: 26px; font-weight: 500; color: var(--accent); margin: 0 0 18px; overflow-wrap: anywhere; }
+.skill h3 { font-family: var(--font-display); font-weight: 500; font-size: 1.15rem; margin: 0 0 8px; }
+.skill p { margin: 0; color: var(--muted); font-size: 15.5px; }
+
+.projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.slot { border: 2px dashed var(--line); border-radius: 12px; padding: 22px; min-width: 0; display: grid; gap: 10px; align-content: start; }
+.slot .soon { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.slot h3 { font-family: var(--font-display); font-weight: 500; font-size: 1.05rem; margin: 0; }
+.slot p { margin: 0; color: var(--muted); font-size: 15.5px; }
+.stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.stack span { font-family: var(--font-mono); font-size: 12.5px; padding: 3px 9px; border-radius: 6px; background: var(--surface); border: 1px solid var(--line); }
+
+footer { border-top: 1px solid var(--line); padding-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; color: var(--muted); font-size: 14.5px; }
+footer code { font-family: var(--font-mono); }
+
+@media (max-width: 820px) {
+  .hero, .about { grid-template-columns: minmax(0, 1fr); }
+  .hero { gap: 32px; padding-block: 24px 48px; }
+  section { padding-block: 44px; }
+}
+@media (max-width: 440px) {
+  .facts div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .code pre { font-size: 12.5px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#top"><b>&lt;</b>fatima<b>/&gt;</b></a>
+    <nav class="nav" aria-label="Разделы">
+      <a href="#about">Обо мне</a>
+      <a href="#skills">Навыки</a>
+      <a href="#projects">Проекты</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div>
+        <span class="tag">Frontend · 15 лет</span>
+        <h1>Фатима Нурланбекова</h1>
+        <p class="role">Я <mark>фронтенд-разработчица</mark>. Делаю сайты и интерфейсы, которые удобно читать и нажимать.</p>
+        <div class="cta">
+          <a class="btn solid" href="#projects">Мои проекты</a>
+          <a class="btn ghost" href="#skills">Что я умею</a>
+        </div>
+      </div>
+
+      <div class="code" role="img" aria-label="Профиль Фатимы в виде JavaScript-объекта">
+        <div class="code-bar"><i></i><i></i><i></i><span>fatima.js</span></div>
+<pre><span class="k">const</span> fatima = {
+  name: <span class="s">"Фатима Нурланбекова"</span>,
+  age: <span class="n">15</span>,
+  role: <span class="s">"фронтенд-разработчица"</span>,
+  stack: [
+    <span class="s">"HTML"</span>, <span class="s">"CSS"</span>,
+    <span class="s">"JavaScript"</span>, <span class="s">"React"</span>
+  ],
+  languages: [<span class="s">"русский"</span>, <span class="s">"кыргызский"</span>],
+  learning: <span class="k">true</span>,
+};
+
+<span class="d">// следующий шаг: новые проекты</span></pre>
+      </div>
+    </div>
+
+    <section id="about">
+      <p class="eyebrow">Обо мне</p>
+      <h2>Мне 15, и я делаю сайты</h2>
+      <div class="about">
+        <div>
+          <p>Я верстаю страницы на HTML и CSS, оживляю их на JavaScript и собираю интерфейсы на React. Мне нравится момент, когда макет превращается в страницу, которая работает.</p>
+          <p>Учусь в Okurmen IT Academy и продолжаю расти: пробую новое, разбираюсь в деталях и довожу работу до аккуратного результата.</p>
+        </div>
+        <dl class="facts">
+          <div><dt>направление</dt><dd>Frontend-разработка</dd></div>
+          <div><dt>образование</dt><dd>Okurmen IT Academy</dd></div>
+          <div><dt>языки</dt><dd>русский, кыргызский</dd></div>
+          <div><dt>возраст</dt><dd>15 лет</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section id="skills">
+      <p class="eyebrow">Навыки</p>
+      <h2>Мой стек</h2>
+      <div class="skills">
+        <article class="skill">
+          <p class="glyph" aria-hidden="true">&lt;html&gt;</p>
+          <h3>HTML</h3>
+          <p>Структура страницы: заголовки, списки, формы, ссылки. Смысловая разметка, понятная и людям, и поисковикам.</p>
+        </article>
+        <article class="skill">
+          <p class="glyph" aria-hidden="true">{ css }</p>
+          <h3>CSS</h3>
+          <p>Оформление и вёрстка: flexbox, grid, адаптивность под телефон и компьютер, цвета и шрифты.</p>
+        </article>
+        <article class="skill">
+          <p class="glyph" aria-hidden="true">() =&gt; js</p>
+          <h3>JavaScript</h3>
+          <p>Поведение страницы: кнопки, формы, события, работа с данными. Страница отвечает на действия человека.</p>
+        </article>
+        <article class="skill">
+          <p class="glyph" aria-hidden="true">&lt;App /&gt;</p>
+          <h3>React</h3>
+          <p>Интерфейс из компонентов: состояние, пропсы, повторное использование кода.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects">
+      <p class="eyebrow">Проекты</p>
+      <h2>Работы появятся здесь</h2>
+      <div class="projects">
+        <article class="slot">
+          <span class="soon">Скоро</span>
+          <h3>Первый проект</h3>
+          <p>Название, короткое описание и ссылки на сайт и код.</p>
+          <div class="stack"><span>HTML</span><span>CSS</span></div>
+        </article>
+        <article class="slot">
+          <span class="soon">Скоро</span>
+          <h3>Второй проект</h3>
+          <p>Что делает страница и какую задачу решает.</p>
+          <div class="stack"><span>JavaScript</span></div>
+        </article>
+        <article class="slot">
+          <span class="soon">Скоро</span>
+          <h3>Третий проект</h3>
+          <p>Приложение на компонентах с живой демо-версией.</p>
+          <div class="stack"><span>React</span></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Фатима Нурланбекова · 2026</span>
+    <span><code>&lt;/&gt;</code> HTML, CSS, JavaScript, React</span>
+  </footer>
+</div>
+
+</body></html>
